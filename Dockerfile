@@ -11,6 +11,7 @@ COPY package*.json yarn.lock ./
 # Install dependencies and build the application
 RUN yarn install
 COPY . .
+ENV PAYLOAD_SECRET $PAYLOAD_SECRET
 RUN npm run build
 
 # Expose the application port
