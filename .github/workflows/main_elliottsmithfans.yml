@@ -27,7 +27,7 @@ jobs:
       - name: 'Build and push Docker image'
         run: |
           printenv PAYLOAD_SECRET
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/esf-web:${{ github.sha }}
+          docker build . --build-arg PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }} -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/esf-web:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/esf-web:${{ github.sha }}
         env:
           PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
