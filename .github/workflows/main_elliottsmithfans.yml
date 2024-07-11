@@ -24,6 +24,7 @@ jobs:
       - name: npm install, build, and test
         env:
           PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+          DATABASE_URI: ${{ secrets.DATABASE_URI }}
         run: |
           echo $PAYLOAD_SECRET
           yarn add copyfiles
