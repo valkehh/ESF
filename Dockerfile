@@ -1,27 +1,20 @@
+# Base image
 FROM node:20-alpine as base
 
+# Builder stage
 FROM base as builder
-
 WORKDIR /home/node/app
-COPY package*.json ./
 
-COPY . .
+# Copy package.json and yarn.lock
+COPY package*.json yarn.lock ./
+
+# Install dependencies and build the application
 RUN yarn install
-RUN yarn build
+COPY . .
+RUN npm run build
 
-FROM base as runtime
-
-ENV NODE_ENV=production
-ENV PAYLOAD_CONFIG_PATH=dist/payload.config.js
-
-WORKDIR /home/node/app
-COPY package*.json  ./
-COPY yarn.lock ./
-
-RUN yarn install --production
-COPY --from=builder /home/node/app/dist ./dist
-COPY --from=builder /home/node/app/build ./build
-
+# Expose the application port
 EXPOSE 3000
 
+# Command to run the application
 CMD ["node", "dist/server.js"]
