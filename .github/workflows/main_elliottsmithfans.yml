@@ -23,9 +23,9 @@ jobs:
 
       - name: npm install, build, and test
         env:
-          NODE_ENV: production
           PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
         run: |
+          echo $PAYLOAD_SECRET
           npm install copyfiles -g
           npm install
           npm run build --if-present
