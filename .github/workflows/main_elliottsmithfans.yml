@@ -26,6 +26,7 @@ jobs:
       # Build and push Docker image
       - name: 'Build and push Docker image'
         run: |
+          printenv PAYLOAD_SECRET
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/esf-web:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/esf-web:${{ github.sha }}
         env:
