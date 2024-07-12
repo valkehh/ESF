@@ -29,6 +29,7 @@ jobs:
           touch .env
           echo PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }} >> .env
           echo DATABASE_URI=${{ secrets.DATABASE_URI }} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
           docker build --platform=linux/amd64 . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/esf-web:latest
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/esf-web:latest
 
